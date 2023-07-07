@@ -24,7 +24,7 @@ const policyActions: string[] = [
 ];
 
 export class Kms extends kms.Key {
-    public constructor(scope: Construct, id: string, config: KmsConfig){
+    public constructor(scope: Construct, id: string, config: KmsConfig, props?: kms.KeyProps){
         
         //default interface values
         const { disableRootPrincipal = false } = config;
@@ -52,7 +52,7 @@ export class Kms extends kms.Key {
             policy: new iam.PolicyDocument({
                 statements: [policyStatement]
             }),
-            ...config,
+            ...props,
         })
     }
 }
