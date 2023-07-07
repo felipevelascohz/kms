@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import 'source-map-support/register';
 import * as cdk from 'aws-cdk-lib';
-import { Sqs } from '../src/sqs';
+import { Kms } from '../src/kms';
 
 const iniciativa :string = 'IdSbxFelipeVelasco';
 const provider = {
@@ -11,7 +11,10 @@ const provider = {
 
 const app = new cdk.App();
 
-new Sqs(app, iniciativa, {
-  sourceRoles: [],
-  env: provider
-});
+const stack = new cdk.Stack(app, iniciativa, {
+  env: provider,
+})
+
+new Kms(stack, "Key", {})
+
+app.synth();
