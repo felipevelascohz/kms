@@ -2,8 +2,7 @@
 
 Library created by:
 
-- Name: Felipe Velasco  
-- Org: BaasKit
+- Name: Felipe Velasco
 
 ## Usage
 

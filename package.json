@@ -21,8 +21,7 @@
   "keywords": [
     "AWS",
     "CDK",
-    "KMS",
-    "BaasKit"
+    "KMS"
   ],
   "author": "Felipe Velasco",
   "license": "ISC",
