@@ -11,7 +11,7 @@ Code example:
 ``` typescript
 import 'source-map-support/register';
 import * as cdk from 'aws-cdk-lib';
-import { Kms } from '@felipevelascohz/kms';
+import * as kms from '@felipevelascohz/kms';
 const iniciativa :string = 'IdSbxFelipeVelasco';
 const provider = {
   account: process.env.CDK_DEFAULT_ACCOUNT, 
@@ -21,6 +21,6 @@ const app = new cdk.App();
 const stack = new cdk.Stack(app, iniciativa, {
   env: provider,
 })
-new Kms(stack, "Key", {})
+new kms.Kms(stack, "Key", {})
 app.synth();
 ```

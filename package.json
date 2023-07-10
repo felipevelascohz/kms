@@ -4,12 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "rm -rf lib/ && tsc",
+    "build": "rm -rf index.* kms.* && tsc",
     "test": "jest",
-    "publish-package": "npm run build && npm publish"
+    "publish-package": "npm run build && npm publish && rm -rf index.* kms.*"
   },
   "files": [
-    "lib/**/*"
+    "index.*",
+    "kms.*"
   ],
   "repository": {
     "type": "git",

@@ -44,7 +44,7 @@ export class Kms extends kms.Key {
 
         //Add an array of source roles ti principal policy statement, required if disableRootPrincipal == true
         for (var i = 0; i < sourceRoles.length; i++) {
-            policyStatement.addPrincipals(new iam.ArnPrincipal(sourceRoles[i]))
+            policyStatement.addPrincipals(new iam.ArnPrincipal(sourceRoles[i]));
         };
 
         super(scope, id, {
@@ -53,6 +53,6 @@ export class Kms extends kms.Key {
                 statements: [policyStatement]
             }),
             ...props,
-        })
-    }
-}
+        });
+    };
+};
