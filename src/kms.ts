@@ -19,14 +19,24 @@ const policyActionsRoot: string[] = [
     "kms:Get*",
     "kms:Delete*",
     "kms:ScheduleKeyDeletion",
-    "kms:CancelKeyDeletion"
+    "kms:CancelKeyDeletion",
+    "kms:Decrypt",
+    "kms:Encrypt",
+    "kms:CreateGrant",
+    "kms:ListAliases",
+    "kms:ReEncrypt*",
+    "kms:GenerateDataKey*",
+    "kms:DescribeKey"
 ];
 
 const policyActions: string[] = [
     "kms:Decrypt",
     "kms:Encrypt",
     "kms:CreateGrant",
-    "kms:ListAliases"
+    "kms:ListAliases",
+    "kms:ReEncrypt*",
+    "kms:GenerateDataKey*",
+    "kms:DescribeKey"
 ]
 
 export class Kms extends kms.Key {
