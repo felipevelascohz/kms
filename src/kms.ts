@@ -4,11 +4,10 @@ import * as kms from 'aws-cdk-lib/aws-kms';
 
 interface KmsConfig {
     actions?: string[];
-    sourceRoles?: string[];
-    disableRootPrincipal?: boolean;  
+    sourceRoles: string[]; 
 }
 
-const policyActions: string[] = [
+const policyActionsRoot: string[] = [
     "kms:Create*",
     "kms:Describe*",
     "kms:Enable*",
@@ -23,26 +22,33 @@ const policyActions: string[] = [
     "kms:CancelKeyDeletion"
 ];
 
+const policyActions: string[] = [
+    "kms:Decrypt",
+    "kms:Encrypt",
+    "kms:CreateGrant"
+]
+
 export class Kms extends kms.Key {
     public constructor(scope: Construct, id: string, config: KmsConfig, props?: kms.KeyProps){
         
         //default interface values
-        const { disableRootPrincipal = false } = config;
         const { sourceRoles = [] } = config;
         const { actions = policyActions } = config;
         
-        //policyStatement for policyDocument
-        const policyStatement = new iam.PolicyStatement({
+        //Add account root to principal policy statement
+
+        var policyStatementRoot = new iam.PolicyStatement({
+            actions: policyActionsRoot,
+            resources: ['*']
+        });
+
+        policyStatementRoot.addPrincipals(new iam.AccountRootPrincipal());
+   
+        var policyStatement = new iam.PolicyStatement({
             actions: actions,
             resources: ['*']
         });
 
-        //Add account root to principal policy statement
-        if (disableRootPrincipal == false ) {
-            policyStatement.addPrincipals(new iam.AccountRootPrincipal());
-        };
-
-        //Add an array of source roles ti principal policy statement, required if disableRootPrincipal == true
         for (var i = 0; i < sourceRoles.length; i++) {
             policyStatement.addPrincipals(new iam.ArnPrincipal(sourceRoles[i]));
         };
@@ -50,7 +56,7 @@ export class Kms extends kms.Key {
         super(scope, id, {
             enableKeyRotation: true,
             policy: new iam.PolicyDocument({
-                statements: [policyStatement]
+                statements: [policyStatement,policyStatementRoot]
             }),
             ...props,
         });
