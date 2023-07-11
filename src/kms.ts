@@ -25,7 +25,8 @@ const policyActionsRoot: string[] = [
 const policyActions: string[] = [
     "kms:Decrypt",
     "kms:Encrypt",
-    "kms:CreateGrant"
+    "kms:CreateGrant",
+    "kms:ListAliases"
 ]
 
 export class Kms extends kms.Key {
