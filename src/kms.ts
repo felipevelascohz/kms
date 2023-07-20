@@ -4,7 +4,7 @@ import * as kms from 'aws-cdk-lib/aws-kms';
 
 interface KmsConfig {
     actions?: string[];
-    sourceRoles: string[]; 
+    sourceRoles?: string[]; 
 }
 
 const policyActionsRoot: string[] = [
