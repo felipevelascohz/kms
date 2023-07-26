@@ -18,15 +18,10 @@ const policyActionsRoot: string[] = [
     "kms:Disable*",
     "kms:Get*",
     "kms:Delete*",
+    "kms:TagResource",
+    "kms:UntagResource",
     "kms:ScheduleKeyDeletion",
     "kms:CancelKeyDeletion",
-    "kms:Decrypt",
-    "kms:Encrypt",
-    "kms:CreateGrant",
-    "kms:ListAliases",
-    "kms:ReEncrypt*",
-    "kms:GenerateDataKey*",
-    "kms:DescribeKey"
 ];
 
 const policyActions: string[] = [
@@ -54,15 +49,22 @@ export class Kms extends kms.Key {
         });
 
         policyStatementRoot.addPrincipals(new iam.AccountRootPrincipal());
-   
+        policyStatementRoot.addCanonicalUserPrincipal
+
+
         var policyStatement = new iam.PolicyStatement({
             actions: actions,
             resources: ['*']
         });
-
-        for (var i = 0; i < sourceRoles.length; i++) {
-            policyStatement.addPrincipals(new iam.ArnPrincipal(sourceRoles[i]));
-        };
+        
+        if ( 0 < sourceRoles.length ) {
+            for (var i = 0; i < sourceRoles.length; i++) {
+                policyStatement.addPrincipals(new iam.ArnPrincipal(sourceRoles[i]));
+            };
+        }
+        else {
+            policyStatement.addPrincipals(new iam.AccountRootPrincipal());
+        }
 
         super(scope, id, {
             enableKeyRotation: true,
