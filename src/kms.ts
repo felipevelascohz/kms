@@ -49,7 +49,6 @@ export class Kms extends kms.Key {
         });
 
         policyStatementRoot.addPrincipals(new iam.AccountRootPrincipal());
-        policyStatementRoot.addCanonicalUserPrincipal
 
 
         var policyStatement = new iam.PolicyStatement({
