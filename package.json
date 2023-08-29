@@ -1,5 +1,5 @@
 {
-  "name": "@felipevelascohz/kms",
+  "name": "@cdk-modules/kms",
   "version": "1.0.15",
   "description": "",
   "main": "index.js",
